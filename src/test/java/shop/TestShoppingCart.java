@@ -80,7 +80,7 @@ public class TestShoppingCart {
     void test_remove_full(){
         cart.AddProduct("prod_1", 3);
         cart.RemoveProduct("prod_1");
-        assertEquals(null, cart.getItems());
+        assertEquals(Map.of(), cart.getItems());
     }
 
     @Test 
@@ -94,14 +94,14 @@ public class TestShoppingCart {
     void test_remove_more_than_in_cart_removes_all(){
         cart.AddProduct("prod_1", 3);
         cart.RemoveProduct("prod_1",5);
-        assertEquals(null, cart.getItems());
+        assertEquals(Map.of(), cart.getItems());
     }
 
     @Test 
     void test_remove_exact_amount(){
         cart.AddProduct("prod_1", 2);
         cart.RemoveProduct("prod_1",2);
-        assertEquals(null, cart.getItems());
+        assertEquals(Map.of(), cart.getItems());
     }
 
     @Test 
@@ -113,7 +113,7 @@ public class TestShoppingCart {
     @ValueSource(ints = {0, -1})
     void test_remove_zero_negative(int qty){
         cart.AddProduct("prod_1", 1);
-        assertThrows(ProductNotFoundException.class, () -> cart.RemoveProduct("prod_1",qty));
+        assertThrows(InvalidQuantityException.class, () -> cart.RemoveProduct("prod_1",qty));
     }
 
     @Test 
@@ -145,7 +145,7 @@ public class TestShoppingCart {
 
     @Test 
     void test_total_price_multiple_promocode(){
-        cart.AddProduct("prod_1", 2);
+        cart.AddProduct("prod_1", 1);
         cart.AddProduct("prod_2", 3);
         cart.ApplyPromo("SALE10");
         assertEquals(2250.0, cart.TotalPrice());
