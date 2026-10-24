@@ -113,7 +113,7 @@ public class TestShoppingCart {
     @ValueSource(ints = {0, -1})
     void test_remove_zero_negative(int qty){
         cart.AddProduct("prod_1", 1);
-        assertThrows(ProductNotFoundException.class, () -> cart.RemoveProduct("prod_1",qty));
+        assertThrows(InvalidQuantityException.class, () -> cart.RemoveProduct("prod_1",qty));
     }
 
     @Test 
