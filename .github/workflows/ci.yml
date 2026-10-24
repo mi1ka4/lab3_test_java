@@ -26,3 +26,11 @@ jobs:
 
       - name: Run tests and check coverage
         run: mvn -B verify
+    
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+    
